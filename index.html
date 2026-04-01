@@ -7,6 +7,7 @@
     <title>Radon Games | Unblocked</title>
     
     <script>
+      // Empêche le crash si un bloqueur de pub est présent
       window.adsbygoogle = window.adsbygoogle || [];
       window.adsbygoogle.loaded = true;
     </script>
@@ -19,9 +20,8 @@
 
     <script>
       async function setupProxy() {
-        // Attente du chargement du script scramjet
         if (typeof $scramjetLoadController === 'undefined') {
-          console.log("En attente de Scramjet...");
+          console.log("En attente du chargement de Scramjet...");
           setTimeout(setupProxy, 200);
           return;
         }
@@ -30,7 +30,7 @@
           const { ScramjetController } = $scramjetLoadController();
           const scramjet = new ScramjetController({
             prefix: "/~/sj/",
-            // SERVEUR BARE PUBLIC (Essaye d'autres si celui-ci échoue)
+            // SERVEUR BARE PUBLIC (Lien nettoyé)
             bare: "[https://bare.benroxy.com/](https://bare.benroxy.com/)", 
             files: {
               wasm: "/scram/scramjet.wasm.wasm",
@@ -40,9 +40,9 @@
           });
           await scramjet.init();
           window.scram = scramjet;
-          console.log("Proxy Scramjet prêt !");
+          console.log("Proxy Scramjet initialisé avec succès !");
         } catch (err) {
-          console.error("Échec de l'initialisation du proxy:", err);
+          console.error("Erreur d'initialisation Scramjet :", err);
         }
       }
       setupProxy();
